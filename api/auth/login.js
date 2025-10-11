@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 
-mongoose.connect(process.env.MONGO_URI, {});
 
 router.post("/", async (req, res) => {
   try {
