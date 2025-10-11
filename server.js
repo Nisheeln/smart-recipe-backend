@@ -13,7 +13,6 @@ const vision = require("@google-cloud/vision");
 // Route imports
 const signupRoute = require("./api/auth/signup");
 const loginRoute = require("./api/auth/login");
-const favoritesRoute = require("./api/favorites");
 const recipesRoute = require("./api/recipes");
 const detectIngredientRoute = require("./api/detect-ingredient");
 
@@ -31,9 +30,8 @@ mongoose
 // ------------------- Routes -------------------
 app.use("/api/auth/signup", signupRoute);
 app.use("/api/auth/login", loginRoute);
-app.use("/api/favorites", favoritesRoute);
 app.use("/api/recipes", recipesRoute);
-app.use("/api/detect-ingredient", detectIngredientRoute);
+app.use("/api/detect-Ingredient", detectIngredientRoute);
 
 // ------------------- Start Server -------------------
 const PORT = process.env.PORT || 8080;
