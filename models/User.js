@@ -11,13 +11,14 @@ const RecipeSchema = new mongoose.Schema({
     calories: Number,
     protein: Number,
   },
+  rating: { type: Number, default: 0 }, // ⭐ NEW FIELD
 }, { _id: false });
 
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  favorites: [RecipeSchema], // Added favorites array
+  favorites: [RecipeSchema],
 });
 
 module.exports = mongoose.model("User", UserSchema);
