@@ -15,6 +15,7 @@ const signupRoute = require("./api/auth/signup");
 const loginRoute = require("./api/auth/login");
 const recipesRoute = require("./api/recipes");
 const detectIngredientRoute = require("./api/dectect-ingredient")
+const favoritesRoute = require("./api/favorites");
 
 
 const app = express();
@@ -32,6 +33,7 @@ app.use("/api/auth/signup", signupRoute);
 app.use("/api/auth/login", loginRoute);
 app.use("/api/recipes", recipesRoute);
 app.use("/api/detect-ingredient", detectIngredientRoute);
+app.use("/api/favorites", favoritesRoute);
 
 // ------------------- Start Server -------------------
 const PORT = process.env.PORT || 8080;

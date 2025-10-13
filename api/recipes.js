@@ -1,11 +1,12 @@
+// routes/recipeRoutes.js
+const express = require("express");
 const { OpenAI } = require("openai");
 
-module.exports = async function (req, res) {
-  if (req.method !== "POST")
-    return res.status(405).json({ error: "Method not allowed" });
+const router = express.Router();
 
+router.post("/", async (req, res) => {
   try {
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY }); // <- now this will find the key
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
     const { ingredients, difficulty, time, dietaryPreference } = req.body;
     if (!ingredients || ingredients.length === 0)
@@ -49,4 +50,6 @@ Return strict JSON:
     console.error(err);
     res.status(500).json({ error: "Failed to generate recipes", details: err.message });
   }
-};
+});
+
+module.exports = router;
