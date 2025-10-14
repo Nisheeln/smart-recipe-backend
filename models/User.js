@@ -11,7 +11,7 @@ const RecipeSchema = new mongoose.Schema({
     calories: Number,
     protein: Number,
   },
-  rating: { type: Number, default: 0 }, // ⭐ NEW FIELD
+  rating: { type: Number, default: 0 },
 }, { _id: false });
 
 const UserSchema = new mongoose.Schema({

@@ -1,15 +1,12 @@
-// /api/detect-ingredient.js
 const express = require("express");
 const multer = require("multer");
 const { ImageAnnotatorClient } = require("@google-cloud/vision");
 
 const router = express.Router();
 
-// In-memory storage for multer
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Initialize Google Vision client
 let visionClient;
 
 if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
@@ -28,7 +25,7 @@ if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
   );
 }
 
-// POST /api/detect-ingredient
+
 router.post("/", upload.single("image"), async (req, res) => {
   try {
     if (!req.file)

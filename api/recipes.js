@@ -1,12 +1,12 @@
 // routes/recipeRoutes.js
 const express = require("express");
 const { OpenAI } = require("openai");
-const auth = require("../middleware/auth"); // to identify logged-in user (optional)
-const User = require("../models/User"); // if you store ratings per user
+const auth = require("../middleware/auth"); 
+const User = require("../models/User"); 
 
 const router = express.Router();
 
-// 🧠 Generate Recipes using OpenAI
+
 router.post("/", async (req, res) => {
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -56,12 +56,12 @@ Return strict JSON:
   }
 });
 
-// ⭐ Save Recipe Rating
+
 router.post("/rate/:title", auth, async (req, res) => {
   try {
     const { title } = req.params;
     const { rating } = req.body;
-    const userId = req.user.id; // from token via middleware
+    const userId = req.user.id;
 
     if (!rating || rating < 1 || rating > 5) {
       return res.status(400).json({ error: "Rating must be between 1 and 5" });
@@ -70,13 +70,13 @@ router.post("/rate/:title", auth, async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ error: "User not found" });
 
-    // Ensure `user.ratedRecipes` array exists in schema
+    
     if (!user.ratedRecipes) user.ratedRecipes = [];
 
     const existing = user.ratedRecipes.find(r => r.title === title);
 
     if (existing) {
-      existing.rating = rating; // update old rating
+      existing.rating = rating;
     } else {
       user.ratedRecipes.push({ title, rating });
     }
